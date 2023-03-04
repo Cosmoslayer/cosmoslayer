@@ -10,7 +10,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {  
   switch(req.method) {
-    case "GET":
+    case 'GET':
       const games = await getRecentlyPlayedGames();
       let last_games_played: any[] = [];
       await Promise.all(games.response.games.map(async (games: any) => {

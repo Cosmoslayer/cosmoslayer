@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import User from '@/components/Steam/User';
 import { Typography, Box, LinearProgress, Card, CircularProgress } from '@mui/material';
 import { useGetGamesQuery } from '@/store/steamSlice';
 import { SportsEsports } from '@mui/icons-material';
@@ -12,6 +13,7 @@ export default function Steam() {
         border: "1px solid black"
       }}
     >
+      <User />
       <Box
         sx={{ 
           background: 'linear-gradient(to right, rgb(245,252,255), rgb(219,243,250), rgb(183,233,247), rgb(146,223,243), rgb(122,215,240))',              
@@ -23,7 +25,7 @@ export default function Steam() {
       >
         <Typography variant='h2'>Last Played Games</Typography>  
         <SportsEsports sx={{ fontSize: '60px' }} />  
-      </Box>
+      </Box>      
       {isLoading && <Box sx={{ textAlign: 'center' }}><CircularProgress size='60px' /></Box>}
       {isSuccess && data?.last_games_played.map((game: GameInterface) => {
         return (

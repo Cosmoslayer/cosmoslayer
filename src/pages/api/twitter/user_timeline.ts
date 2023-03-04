@@ -10,7 +10,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   switch(req.method) {
-    case "GET":
+    case 'GET':
       const tweets = await getUserTimeline();
       res.status(200).json({ tweets })
       break;
