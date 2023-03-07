@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import User from '@/components/Steam/User';
-import { Typography, Box, LinearProgress, Card, CircularProgress } from '@mui/material';
+import { Typography, Box, LinearProgress, Card, Skeleton } from '@mui/material';
 import { useGetGamesQuery } from '@/store/steamSlice';
 import { SportsEsports } from '@mui/icons-material';
 import { GameInterface } from '@/helpers/interfaces';
 
 export default function Steam() {
   const { data, isLoading, isSuccess, isError, error } = useGetGamesQuery<any>();
+  const skeletonArray = [{ id: 1 }, { id: 2 }, { id: 3 }]
   return (
     <Box
       sx={{
@@ -26,7 +27,29 @@ export default function Steam() {
         <Typography variant='h2'>Last Played Games</Typography>  
         <SportsEsports sx={{ fontSize: '60px' }} />  
       </Box>      
-      {isLoading && <Box sx={{ textAlign: 'center' }}><CircularProgress size='60px' /></Box>}
+      {isLoading && skeletonArray.map((skeleton) => {
+        return (
+          <Card 
+            sx={{
+              margin: '2px',
+            }}
+            key={skeleton.id}
+          >
+            <Box
+              sx={{
+                textAlign: 'center'
+              }}
+            >
+                <Skeleton variant="text" sx={{ fontSize: '32px' }} />
+                <Skeleton variant="rectangular" width={376} height={69} />
+                <Skeleton variant="text" sx={{ fontSize: '24px' }} />
+                <Skeleton variant="rectangular" width={376} height={48} />
+                <Skeleton variant="text" sx={{ fontSize: '24px' }} />
+                <Skeleton variant="rectangular" width={376} height={44} />
+            </Box>
+          </Card>          
+        )
+      })}
       {isSuccess && data?.last_games_played.map((game: GameInterface) => {
         return (
           <Card 
