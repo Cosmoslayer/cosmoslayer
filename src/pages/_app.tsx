@@ -1,5 +1,6 @@
 import Steam from '@/components/Steam';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Container, Grid } from '@mui/material';
 import { steamSlice } from '@/store/steamSlice'
 import { twitterSlice } from '@/store/twitterSlice';
@@ -28,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </ApiProvider>
         </Grid>
       </Grid>
+      <Footer />
     </Container>
   );
 }
