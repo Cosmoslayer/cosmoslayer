@@ -1,14 +1,27 @@
+import { useState, useEffect } from 'react';
 import Tweet from '@/components/Twitter/Tweet';
-import { Typography, Card, Box, Skeleton } from '@mui/material'
-import { useGetTimelineQuery } from '@/store/twitterSlice'
-import { TweetInterface } from '@/helpers/interfaces';
+import { Typography, Card, Box, Skeleton } from '@mui/material';
+import { useGetTimelineQuery } from '@/store/twitterSlice';
+import { SkeletonInterface, TweetInterface } from '@/helpers/interfaces';
 
 export default function Twitter() {
   const { data, isLoading, isSuccess, isError, error } = useGetTimelineQuery<any>();
-  const skeletonArray = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }]
+  const [skeletonArray, setSkeletonArray] = useState<Array<SkeletonInterface>>([]);
+
+  useEffect(() => {
+    const skeletons = [];
+    for (let id = 1; id <= 20; id++) {
+      const skeletonObject = {
+        id
+      }
+      skeletons.push(skeletonObject);
+    }
+    setSkeletonArray(skeletons);
+  }, [skeletonArray])
+    
   return (
     <>
-      {isLoading && skeletonArray.map((skeleton) => {
+      {isLoading && skeletonArray.map((skeleton: SkeletonInterface) => {
         return (
           <Card 
             sx={{

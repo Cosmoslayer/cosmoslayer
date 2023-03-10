@@ -32,3 +32,7 @@ export interface GameInterface {
     percentage: number,
   }
 };
+
+export interface SkeletonInterface {
+  id: number,
+};
