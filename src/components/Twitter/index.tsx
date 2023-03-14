@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import Tweet from '@/components/Twitter/Tweet';
 import { Typography, Card, Box, Skeleton } from '@mui/material';
 import { useGetTimelineQuery } from '@/store/twitterSlice';
@@ -6,9 +6,8 @@ import { SkeletonInterface, TweetInterface } from '@/helpers/interfaces';
 
 export default function Twitter() {
   const { data, isLoading, isSuccess, isError, error } = useGetTimelineQuery<any>();
-  const [skeletonArray, setSkeletonArray] = useState<Array<SkeletonInterface>>([]);
 
-  useEffect(() => {
+  const skeletonArray = useMemo(() => {
     const skeletons = [];
     for (let id = 1; id <= 20; id++) {
       const skeletonObject = {
@@ -16,8 +15,8 @@ export default function Twitter() {
       }
       skeletons.push(skeletonObject);
     }
-    setSkeletonArray(skeletons);
-  }, [skeletonArray])
+    return skeletons;
+  }, [])
     
   return (
     <>
