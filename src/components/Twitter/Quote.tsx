@@ -1,5 +1,6 @@
-import { Typography, Box } from '@mui/material'
-import { FormatTweet, FormatDate } from '@/helpers/utilities'
+import moment from 'moment';
+import { Typography, Box } from '@mui/material';
+import { FormatTweet } from '@/helpers/utilities';
 import { TweetInterface } from '@/helpers/interfaces';
 
 export default function Quote({ tweet } : { tweet: TweetInterface }) {
@@ -14,7 +15,7 @@ export default function Quote({ tweet } : { tweet: TweetInterface }) {
         }}
       >
         <Typography variant='h6'>{FormatTweet(tweet?.text).getText()}</Typography>
-        <Typography variant='caption'>{FormatDate(new Date(tweet?.quoted_status?.created_at))}</Typography>
+        <Typography variant='caption'>{moment(new Date(tweet?.quoted_status?.created_at)).format('MMM E, YYYY')}</Typography>
       </Box>      
       <Box
         sx={{
@@ -33,7 +34,7 @@ export default function Quote({ tweet } : { tweet: TweetInterface }) {
           }}
         >
           <Typography fontWeight={700} variant='body2'>{tweet?.quoted_status?.user?.name}</Typography>
-          <Typography variant='caption'>{FormatDate(new Date(tweet?.quoted_status?.created_at))}</Typography>
+          <Typography variant='caption'>{moment(new Date(tweet?.quoted_status?.created_at)).format('MMM E, YYYY')}</Typography>
         </Box>
         <Typography>{FormatTweet(tweet?.quoted_status?.text).getText()}</Typography>
       </Box>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Status from '@/components/Steam/Status';
 import { Typography, Box, Card, Avatar, Skeleton } from '@mui/material';
 import { useGetUserQuery } from '@/store/steamSlice';
 import { Report } from '@mui/icons-material';
@@ -97,7 +98,7 @@ export default function User() {
               </Box>
               <Typography ml='5px' variant='h6'>Level: {data?.user?.level}</Typography>  
             </Box>
-            <Typography variant='h6'>is currently {data?.user?.personaState}</Typography> 
+            <Status personaState={data?.user?.personaState} gameextrainfo={data?.user?.gameextrainfo} lastLogOff={data?.user?.lastLogOff} />
           </Card>
         </Link>
       )}

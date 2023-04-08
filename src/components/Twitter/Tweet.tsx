@@ -1,7 +1,8 @@
 import Retweeted from '@/components/Twitter/Retweeted';
 import Quote from '@/components/Twitter/Quote';
-import { Typography, Box } from '@mui/material'
-import { FormatTweet, FormatDate } from '@/helpers/utilities';
+import moment from 'moment';
+import { Typography, Box } from '@mui/material';
+import { FormatTweet } from '@/helpers/utilities';
 import { TweetInterface } from '@/helpers/interfaces';
 
 export default function Tweet (tweet: TweetInterface) {
@@ -23,7 +24,7 @@ export default function Tweet (tweet: TweetInterface) {
       }}
     >
       <Typography variant='h6'>{FormatTweet(tweet?.text).getText()}</Typography>
-      <Typography variant='caption'>{FormatDate(new Date(tweet?.created_at))}</Typography>
+      <Typography variant='caption'>{moment(new Date(tweet?.created_at)).format('MMM E, YYYY')}</Typography>
     </Box>      
   )
 }

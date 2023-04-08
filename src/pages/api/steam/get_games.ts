@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Steam } from '@/constants/credentials';
 
 type Data = {
-  last_games_played: Array<Object>;
+  last_games_played: Array<Object>
 }
 
 export default async function handler(
