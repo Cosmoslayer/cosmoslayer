@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Status from '@/components/Steam/Status';
+import ShowError from '@/components/ShowError';
 import { Typography, Box, Card, Avatar, Skeleton } from '@mui/material';
 import { useGetUserQuery } from '@/store/steamSlice';
 import { Report } from '@mui/icons-material';
@@ -102,7 +103,7 @@ export default function User() {
           </Card>
         </Link>
       )}
-      {isError && <Typography>An error occured! Error: {error}</Typography>}
+      {isError && <ShowError error={error.data.error} />}
     </Box>
   )
 }

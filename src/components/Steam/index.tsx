@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import User from '@/components/Steam/User';
+import ShowError from '@/components/ShowError';
 import { Typography, Box, LinearProgress, Card, Skeleton } from '@mui/material';
 import { useGetGamesQuery } from '@/store/steamSlice';
 import { SportsEsports } from '@mui/icons-material';
@@ -108,7 +109,7 @@ export default function Steam() {
           </Card>
         );
       })}
-      {isError && <Typography>An error occured! Error: {error}</Typography>}
+      {isError && <ShowError error={error.data.error} />}
     </Box>
   );
 }

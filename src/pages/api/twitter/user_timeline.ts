@@ -2,7 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Twitter } from '@/constants/credentials';
 
 type Data = {
-  tweets: Object
+  tweets: Object,
+  error: string
 }
 
 export default async function handler(
@@ -11,8 +12,18 @@ export default async function handler(
 ) {
   switch(req.method) {
     case 'GET':
-      const tweets = await getUserTimeline();
-      res.status(200).json({ tweets })
+      try {
+        const tweets = await getUserTimeline();
+        res.status(200).json({
+          tweets,
+          error: ''
+        })
+      } catch (err) {
+        res.status(500).send({
+          error: `${err}`,
+          tweets: {}
+        })
+      }      
       break;
   }
 }

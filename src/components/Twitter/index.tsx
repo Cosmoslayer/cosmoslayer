@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import Tweet from '@/components/Twitter/Tweet';
-import { Typography, Card, Box, Skeleton } from '@mui/material';
+import ShowError from '@/components/ShowError';
+import { Card, Box, Skeleton } from '@mui/material';
 import { useGetTimelineQuery } from '@/store/twitterSlice';
 import { SkeletonInterface, TweetInterface } from '@/helpers/interfaces';
 
@@ -56,7 +57,7 @@ export default function Twitter() {
           </Card>
         )
       })}
-      {isError && <Typography>An error occured! Error: {error}</Typography>}
+      {isError && <ShowError error={error.data.error} />}
     </>
   )
 }

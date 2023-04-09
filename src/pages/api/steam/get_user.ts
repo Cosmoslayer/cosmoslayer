@@ -9,7 +9,8 @@ type Data = {
     profileUrl: string,
     avatar: string,
     lastLogOff: number,
-  }  
+  },
+  error: string
 }
 
 export default async function handler(
@@ -18,24 +19,41 @@ export default async function handler(
 ) {  
   switch(req.method) {
     case 'GET':
-      const player = await getPlayerSummaries();
-      const level = await getSteamLevel()
-      const personaState = player.response.players[0].personastate;
-      const gameextrainfo = player.response.players[0].gameextrainfo ?? "";      
-      const personaName = player.response.players[0].personaname;
-      const profileUrl = player.response.players[0].profileurl;
-      const avatar = player.response.players[0].avatarfull;
-      const lastLogOff = player.response.players[0].lastlogoff;
-      const user = {
-        level,
-        gameextrainfo,
-        personaState,
-        personaName,
-        profileUrl,
-        avatar,
-        lastLogOff,
-      }
-      res.status(200).json({ user });
+      try {
+        const player = await getPlayerSummaries();
+        const level = await getSteamLevel()
+        const personaState = player.response.players[0].personastate;
+        const gameextrainfo = player.response.players[0].gameextrainfo ?? "";      
+        const personaName = player.response.players[0].personaname;
+        const profileUrl = player.response.players[0].profileurl;
+        const avatar = player.response.players[0].avatarfull;
+        const lastLogOff = player.response.players[0].lastlogoff;
+        const user = {
+          level,
+          gameextrainfo,
+          personaState,
+          personaName,
+          profileUrl,
+          avatar,
+          lastLogOff,
+        }
+        res.status(200).json({
+          user,
+          error: ''
+        });
+      } catch (err) {
+        res.status(500).send({
+          error: `${err}`,
+          user: {
+            personaState: '',
+            gameextrainfo: '',
+            personaName: '',
+            profileUrl: '',
+            avatar: '',
+            lastLogOff: 0,
+          }
+        })
+      }           
       break;
   }
 }

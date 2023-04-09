@@ -5,8 +5,8 @@ import { Container, Grid } from '@mui/material';
 import { steamSlice } from '@/store/steamSlice'
 import { twitterSlice } from '@/store/twitterSlice';
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import type { AppProps } from 'next/app'
-import '@/styles/globals.css'
+import type { AppProps } from 'next/app';
+import '@/styles/globals.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
