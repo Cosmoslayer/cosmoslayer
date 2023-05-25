@@ -50,6 +50,9 @@ async function getRecentlyPlayedGames() {
 async function getGameAchievements(appid: number) {
   const res = await fetch(`http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/?appid=${appid}&key=${Steam.key}&steamid=${Steam.id}`, { method: "GET" });
   const gameAchievements = await res.json();
+  if (gameAchievements.playerstats.error) {
+    return 'None';
+  };
   const totalAchieved = gameAchievements.playerstats.achievements.filter((game: any) => game.achieved === 1).length;
   const totalAchievements = gameAchievements.playerstats.achievements.length;
   const percentage = (totalAchieved / totalAchievements * 100).toFixed(2);

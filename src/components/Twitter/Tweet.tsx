@@ -24,7 +24,7 @@ export default function Tweet (tweet: TweetInterface) {
       }}
     >
       <Typography variant='h6'>{FormatTweet(tweet?.text).getText()}</Typography>
-      <Typography variant='caption'>{moment(new Date(tweet?.created_at)).format('MMM E, YYYY')}</Typography>
+      <Typography variant='caption'>{moment(new Date(tweet?.created_at)).format('MMM D, YYYY')}</Typography>
     </Box>      
   )
 }

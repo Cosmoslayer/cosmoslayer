@@ -15,7 +15,7 @@ export default function Quote({ tweet } : { tweet: TweetInterface }) {
         }}
       >
         <Typography variant='h6'>{FormatTweet(tweet?.text).getText()}</Typography>
-        <Typography variant='caption'>{moment(new Date(tweet?.quoted_status?.created_at)).format('MMM E, YYYY')}</Typography>
+        <Typography variant='caption'>{moment(new Date(tweet?.quoted_status?.created_at)).format('MMM D, YYYY')}</Typography>
       </Box>      
       <Box
         sx={{
@@ -34,7 +34,7 @@ export default function Quote({ tweet } : { tweet: TweetInterface }) {
           }}
         >
           <Typography fontWeight={700} variant='body2'>{tweet?.quoted_status?.user?.name}</Typography>
-          <Typography variant='caption'>{moment(new Date(tweet?.quoted_status?.created_at)).format('MMM E, YYYY')}</Typography>
+          <Typography variant='caption'>{moment(new Date(tweet?.quoted_status?.created_at)).format('MMM D, YYYY')}</Typography>
         </Box>
         <Typography>{FormatTweet(tweet?.quoted_status?.text).getText()}</Typography>
       </Box>

@@ -15,7 +15,7 @@ export default function Retweeted({ tweet } : { tweet: TweetInterface }) {
         }}
       >
         <Typography variant='h6'>{tweet?.user?.name} retweeted a post from {tweet?.retweeted_status?.user?.name}</Typography>
-        <Typography variant='caption'>{moment(new Date(tweet?.retweeted_status?.created_at)).format('MMM E, YYYY')}</Typography>
+        <Typography variant='caption'>{moment(new Date(tweet?.retweeted_status?.created_at)).format('MMM D, YYYY')}</Typography>
       </Box>      
       <Box
         sx={{
@@ -34,7 +34,7 @@ export default function Retweeted({ tweet } : { tweet: TweetInterface }) {
           }}
         >
           <Typography fontWeight={700} variant='body2'>{tweet?.retweeted_status?.user?.name}</Typography>
-          <Typography variant='caption'>{moment(new Date(tweet?.retweeted_status?.created_at)).format('MMM E, YYYY')}</Typography>
+          <Typography variant='caption'>{moment(new Date(tweet?.retweeted_status?.created_at)).format('MMM D, YYYY')}</Typography>
         </Box>
         <Typography>{FormatTweet(tweet?.retweeted_status.text).getText()}</Typography>
       </Box>

@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import User from '@/components/Steam/User';
 import ShowError from '@/components/ShowError';
-import { Typography, Box, LinearProgress, Card, Skeleton } from '@mui/material';
+import Achievements from '@/components/Steam/Achievements';
+import { Typography, Box, Card, Skeleton } from '@mui/material';
 import { useGetGamesQuery } from '@/store/steamSlice';
 import { SportsEsports } from '@mui/icons-material';
 import { GameInterface } from '@/helpers/interfaces';
@@ -91,21 +92,32 @@ export default function Steam() {
                 <Typography fontWeight={600}>All time</Typography>
                 <Typography variant='body1'>{game.playtime_forever} hrs.</Typography>
               </Box>
-            </Box>
-            <Box sx={{
-              textAlign: 'center',
-            }}>
-              <Typography sx={{ background: 'linear-gradient(to right, #E6F2FF, #B9DCFF, #8DC5FE, #60AFFE)', fontWeight: 700, mb: "5px" }} variant='body1'>Achievements</Typography>
-              <Typography variant='body1'>{game.achievements.totalAchieved} / {game.achievements.totalAchievements}</Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ width: '85%', mr: 1 }}>
-                  <LinearProgress variant="determinate" value={Number(game.achievements.percentage)} />
-                </Box>
-                <Box sx={{ minWidth: 35 }}>
-                  <Typography variant="body2" color="text.secondary">{`${game.achievements.percentage}%`}</Typography>
-                </Box>
-              </Box>
-            </Box>
+            </Box>            
+            <Box 
+              sx={{
+                textAlign: 'center',
+              }}
+            >
+              <Typography 
+                sx={{ 
+                  background: 'linear-gradient(to right, #E6F2FF, #B9DCFF, #8DC5FE, #60AFFE)',
+                  fontWeight: 700,
+                  mb: "5px"
+                }}
+                variant='body1'
+              >
+                Achievements
+              </Typography>
+              {game.achievements === "None" ? (
+                <Typography 
+                  variant='body1'
+                >
+                  No achievements!
+                </Typography>              
+              ) : (
+                <Achievements achievements={game.achievements} />
+              )}
+            </Box> 
           </Card>
         );
       })}

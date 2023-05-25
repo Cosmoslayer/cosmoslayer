@@ -26,13 +26,15 @@ export interface GameInterface {
   name: string,
   playtime_2weeks: string,
   playtime_forever: string,
-  achievements: {
-    totalAchieved: string,
-    totalAchievements: string,
-    percentage: number,
-  }
+  achievements: any,
 };
 
 export interface SkeletonInterface {
   id: number,
+};
+
+export interface AchievementInterface {
+  totalAchieved: string,
+  totalAchievements: string,
+  percentage: number,
 };
