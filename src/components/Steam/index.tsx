@@ -13,7 +13,11 @@ export default function Steam() {
       <Grid container>
         {isSuccess && data?.last_games_played.map((game: GameInterface) => {
           return (
-            <Grid item xl={4} xs={12}>              
+            <Grid
+              key={game.appid}
+              item xl={4}
+              xs={12}
+            >              
               <Card 
                 sx={{
                   border: '1px solid #517693',
@@ -21,7 +25,6 @@ export default function Steam() {
                   margin: '20px',
                   height: '90%'
                 }}
-                key={game.appid}
               >
                 <Box
                   sx={{

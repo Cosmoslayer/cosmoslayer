@@ -44,7 +44,8 @@ export default function Home() {
         {items.map((item, index) => {
           const currentPanel = "panel".concat((index + 1).toString());
           return (
-            <Accordion 
+            <Accordion
+              key={index}
               expanded={expanded === currentPanel}
               onChange={handleChange(currentPanel)}
               sx={{

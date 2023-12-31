@@ -12,24 +12,24 @@ export default function PersonaState({
   lastLogOff: number
 }) {
   if (gameextrainfo) {
-    return <Typography variant='h6'>I am currently playing {gameextrainfo}</Typography>
+    return <Typography variant='h6'>&quotI am currently playing {gameextrainfo}</Typography>
   }
   else {
     switch (personaState) {
       case 0:
-        return <Typography variant='h6'>"I was last seen {moment.unix(lastLogOff).fromNow()}"</Typography>
+        return <Typography variant='h6'>&quotI was last seen {moment.unix(lastLogOff).fromNow()}&ldquo</Typography>
       case 1:
-        return <Typography variant='h6'>"I am currently Online"</Typography>
+        return <Typography variant='h6'>&quotI am currently Online&ldquo</Typography>
       case 2:
-        return <Typography variant='h6'>"I am currently Busy"</Typography>
+        return <Typography variant='h6'>&quotI am currently Busy&ldquo</Typography>
       case 3:
-        return <Typography variant='h6'>"I am currently Away"</Typography>
+        return <Typography variant='h6'>&quotI am currently Away&ldquo</Typography>
       case 4:
-        return <Typography variant='h6'>"I am currently Snoozing"</Typography>
+        return <Typography variant='h6'>&quotI am currently Snoozing&ldquo</Typography>
       case 5:
-        return <Typography variant='h6'>"I am currently looking to trade"</Typography>
+        return <Typography variant='h6'>&quotI am currently looking to trade&ldquo</Typography>
       case 6:
-        return <Typography variant='h6'>"I am currently looking to play"</Typography>
+        return <Typography variant='h6'>&quotI am currently looking to play&ldquo</Typography>
     }
   }
   return null;
