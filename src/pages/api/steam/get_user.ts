@@ -21,7 +21,8 @@ export default async function handler(
     case 'GET':
       try {
         const player = await getPlayerSummaries();
-        const level = await getSteamLevel()
+        const level = await getSteamLevel();
+        const badge = await getBadge();
         const personaState = player.response.players[0].personastate;
         const gameextrainfo = player.response.players[0].gameextrainfo ?? "";      
         const personaName = player.response.players[0].personaname;
@@ -30,6 +31,7 @@ export default async function handler(
         const lastLogOff = player.response.players[0].lastlogoff;
         const user = {
           level,
+          badge,
           gameextrainfo,
           personaState,
           personaName,
@@ -68,4 +70,10 @@ async function getSteamLevel() {
   const res = await fetch(`https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=${Steam.key}&steamid=${Steam.id}`, { method: "GET" });
   const data = await res.json();
   return data.response.player_level;
+}
+
+async function getBadge() {
+  const res = await fetch(`https://api.steampowered.com/IPlayerService/GetBadges/v1/?key=${Steam.key}&steamid=${Steam.id}`, { method: "GET" });
+  const data = await res.json();
+  return data.response;
 }
