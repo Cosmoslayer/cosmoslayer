@@ -1,11 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const steamSlice = createApi({
-  reducerPath: 'steamSlice',
+export const apiSlice = createApi({
+  reducerPath: 'api',
   baseQuery: fetchBaseQuery({    
     baseUrl: process.env.API_BASE_URL,
   }),
   endpoints: (builder) => ({
+    getStream: builder.query<void, void>({
+      query: () => ({
+        url: 'api/twitch/get_stream',        
+        method: 'GET',        
+      }),      
+    }),
     getGames: builder.query<void, void>({
       query: () => ({
         url: 'api/steam/get_games',
@@ -21,4 +27,4 @@ export const steamSlice = createApi({
   }),  
 });
 
-export const { useGetGamesQuery, useGetUserQuery } = steamSlice;
+export const { useGetStreamQuery, useGetGamesQuery, useGetUserQuery } = apiSlice;

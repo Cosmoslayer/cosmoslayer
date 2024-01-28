@@ -5,7 +5,7 @@ import ShowError from '@/components/ShowError';
 
 import { useMemo } from 'react';
 import { Box, LinearProgress, Typography, Grid, Card, Avatar, Skeleton } from '@mui/material';
-import { useGetUserQuery } from '@/store/steamSlice';
+import { useGetUserQuery } from '@/store/apiSlice';
 
 export default function Banner() {  
   const { data, isLoading, isSuccess, isError, error } = useGetUserQuery<any>();

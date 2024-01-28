@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Steam } from '@/constants/credentials';
+import { Steam } from '@/helpers/credentials';
 
 type Data = {
   last_games_played: Array<Object>,

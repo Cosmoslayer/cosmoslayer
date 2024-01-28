@@ -2,9 +2,9 @@ import Image from 'next/image';
 import ShowError from '@/components/ShowError';
 import Achievements from '@/components/Steam/Achievements';
 
-import { Typography, Box, Card, Grid } from '@mui/material';
-import { useGetGamesQuery } from '@/store/steamSlice';
 import { GameInterface } from '@/helpers/interfaces';
+import { useGetGamesQuery } from '@/store/apiSlice';
+import { Typography, Box, Card, Grid } from '@mui/material';
 
 export default function Steam() {
   const { data, isSuccess, isError, error } = useGetGamesQuery<any>();

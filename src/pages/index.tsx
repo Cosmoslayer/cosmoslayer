@@ -1,34 +1,15 @@
 import Head from 'next/head';
-import Steam from '@/components/Steam';
-import Social from '@/components/Social';
 import Footer from '@/components/Footer';
-import Profile from '@/components/Profile';
-import History from '@/components/History';
+import Twitch from '@/components/Twitch';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import { items } from '@/helpers/constants';
 import { useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 
 export default function Home() {
   const [expanded, setExpanded] = useState<string | false>('panel1');
-  const items = [
-    {
-      name: "Profile",
-      menu: <Profile />
-    },
-    {
-      name: "History",
-      menu: <History />
-    },
-    {
-      name: "Social",
-      menu: <Social />
-    },
-    {
-      name: "Last Played Games",
-      menu: <Steam />
-    },
-  ]
+  
   const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -73,6 +54,7 @@ export default function Home() {
           );           
         })}
         <Footer />
+        <Twitch />
       </main>
     </>
   )
