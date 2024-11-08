@@ -1,31 +1,24 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from "next/server";
+
 import { Twitch } from '@/helpers/credentials';
 
-type Data = {
-  stream: Object,
-  error: string
-}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  switch(req.method) {
-    case 'GET':
-      try {
-        const stream = await getStream();
-        res.status(200).json({
-          stream,
-          error: ''
-        })
-      } catch (err) {
-        res.status(500).send({
-          error: `${err}`,
-          stream: {}
-        })
-      }      
-    break;
-  }
+export async function GET() {
+  try {
+    const stream = await getStream();
+    return NextResponse.json({
+      stream,
+      error: ''
+    }, {
+      status: 200,
+    })
+  } catch (error) {
+    return NextResponse.json({
+      error: `${error}`,
+      stream: {}
+    }, {
+      status: 500,
+    })
+  }  
 };
 
 async function getStream() {  

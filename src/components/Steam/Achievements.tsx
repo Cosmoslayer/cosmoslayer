@@ -1,4 +1,5 @@
 import { Typography, Box, LinearProgress } from '@mui/material';
+
 import { AchievementInterface } from '@/helpers/interfaces';
 
 export default function Achievements({ achievements } : { achievements: AchievementInterface }) {

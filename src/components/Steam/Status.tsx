@@ -1,36 +1,79 @@
-import moment from 'moment';
+import { Box, Typography } from '@mui/material';
+import { Circle, SportsEsports } from '@mui/icons-material';
 
-import { Typography } from '@mui/material';
-
-export default function PersonaState({
+export default function Status({
   personaState,
   gameextrainfo,
-  lastLogOff
 } : {
   personaState: number,
   gameextrainfo: string,
-  lastLogOff: number
 }) {
+  let status = {
+    name: "",
+    color: "",
+  };
+
   if (gameextrainfo) {
-    return <Typography variant='h6'>&quot;I am currently playing {gameextrainfo}&ldquo;</Typography>
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <SportsEsports />
+        <Typography
+          variant='h6'
+          align='center'
+          marginLeft='2px'
+        >
+          Playing {gameextrainfo}
+        </Typography>
+      </Box>
+    );
   }
-  else {
-    switch (personaState) {
-      case 0:
-        return <Typography variant='h6'>&quot;I was last seen {moment.unix(lastLogOff).fromNow()}&ldquo;</Typography>
-      case 1:
-        return <Typography variant='h6'>&quot;I am currently Online&ldquo;</Typography>
-      case 2:
-        return <Typography variant='h6'>&quot;I am currently Busy&ldquo;</Typography>
-      case 3:
-        return <Typography variant='h6'>&quot;I am currently Away&ldquo;</Typography>
-      case 4:
-        return <Typography variant='h6'>&quot;I am currently Snoozing&ldquo;</Typography>
-      case 5:
-        return <Typography variant='h6'>&quot;I am currently looking to trade&ldquo;</Typography>
-      case 6:
-        return <Typography variant='h6'>&quot;I am currently looking to play&ldquo;</Typography>
-    }
+
+  switch (personaState) {
+    case 0:
+      status = {name: "Offline", color: "#d32f2f"};
+      break;
+    case 1:
+      status = {name: "Online", color: "#2e7d32"};
+      break;   
+    case 2:
+      status = {name: "Busy", color: "#9c27b0"};
+      break;
+    case 3:
+      status = {name: "Away", color: "#ed6c02"};
+      break;
+    case 4:
+      status = {name: "Snoozing", color: "#0288d1"};
+      break;
+    case 5:
+      status = {name: "Looking to trade", color: "#0288d1"};
+      break;
+    case 6:
+      status = {name: "Looking to play", color: "#0288d1"};
+      break;
   }
-  return null;
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: 'center',
+      }}
+    >
+      <Circle
+        sx={{
+          color: status.color
+        }}
+      />
+      <Typography
+        variant='h6'
+        marginLeft='2px'
+      >
+        {status.name}
+      </Typography>
+    </Box>
+  );
 }

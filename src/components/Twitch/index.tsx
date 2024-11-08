@@ -1,14 +1,26 @@
-import Link from 'next/link';
-import ShowError from '@/components/ShowError';
+'use client'
 
 import { useState } from 'react';
-import { useGetStreamQuery } from '@/store/apiSlice';
-import { Snackbar, IconButton, Button } from '@mui/material';
 
+import Link from 'next/link';
 import CloseIcon from '@mui/icons-material/Close';
 
+import {
+  Button,
+  IconButton,
+  Snackbar,  
+  SnackbarContent
+} from '@mui/material';
+import Slide, { SlideProps } from '@mui/material/Slide';
+
+import { useGetStreamQuery } from '@/store/apiSlice';
+
+import ShowError from '../ShowError';
+
 export default function Twitch() {
+
   const { data, isSuccess, isError, error } = useGetStreamQuery<any>();
+  
   const [open, setOpen] = useState(true);
 
   const gameName = data?.stream?.data[0]?.game_name ?? '';
@@ -60,12 +72,20 @@ export default function Twitch() {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           open={open}
           autoHideDuration={10000}
-          onClose={handleClose}
-          message={message}
-          action={action}
-        />
+          onClose={handleClose}         
+          TransitionComponent={SlideTranstion}
+        >
+          <SnackbarContent
+            message={message}
+            action={action}
+          />
+        </Snackbar>
       )}
       {isError && <ShowError error={error.data.error} />}
     </>
   );
+};
+
+function SlideTranstion(props: SlideProps) {
+  return <Slide {...props} direction="left" />
 };
