@@ -21,7 +21,7 @@ export async function GET() {
   }      
 };
 
-export async function getImages() {
+async function getImages() {
   const res = await fetch(`https://api.cloudinary.com/v1_1/${Cloudinary.name}/resources/by_asset_folder?asset_folder=${Cloudinary.folder}&tags=true&metadata=true`, {
     method: 'GET',
     headers: {
