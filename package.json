@@ -16,7 +16,6 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^6.1.6",
     "@mui/material-nextjs": "^6.1.6",
-    "@next/font": "13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
     "@types/node": "18.13.0",
     "@types/react": "npm:types-react@19.0.0-rc.1",
