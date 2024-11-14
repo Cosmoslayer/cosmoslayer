@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import Slide, { SlideProps } from '@mui/material/Slide';
 
+import { pluralize } from '@/helpers/utilities';
 import { useGetStreamQuery } from '@/store/apiSlice';
 
 import ShowError from '../ShowError';
@@ -25,7 +26,7 @@ export default function Twitch() {
 
   const gameName = data?.stream?.data[0]?.game_name ?? '';
   const viewerCount = data?.stream?.data[0]?.viewer_count ?? 0;
-  const message = `Currently streaming ${gameName} with ${viewerCount} viewer(s) on Twitch.`; 
+  const message = `Currently streaming ${gameName} with ${viewerCount} ${pluralize(viewerCount, 'viewer')} on Twitch.`;
   
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {

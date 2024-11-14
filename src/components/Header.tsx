@@ -17,7 +17,6 @@ import {
   Toolbar,
   Typography
 } from '@mui/material';
-
 import { Menu } from '@mui/icons-material';
 
 import { lists, pages } from '@/helpers/constants';

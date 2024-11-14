@@ -9,7 +9,7 @@ export default function Social() {
     <Box
       sx={{
         display: 'flex',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         alignItems: 'center',
         width: {
           xs: '50%',

@@ -4,6 +4,10 @@ export interface AchievementInterface {
   percentage: number,
 };
 
+export interface FeatureInterface {
+  features: Array<TagInterface>,
+};
+
 export interface GameInterface {
   appid: number,
   name: string,
@@ -20,6 +24,12 @@ export interface ImageInterface {
     height: number,
     width: number,
   },
+};
+
+export interface InteractionInterface {
+  reply: number,
+  repost: number,
+  like: number,
 };
 
 export interface PortfolioImageInterface {
@@ -48,10 +58,18 @@ export interface PostInterface {
           alt: string,
         },
       },
+      facets?: Array<FeatureInterface>,
     },
+    replyCount: number,
+    repostCount: number,
+    likeCount: number,
   },
 };
 
 export interface SkeletonInterface {
   id: number,
+};
+
+export interface TagInterface {
+  tag: string | Array<string>,
 };
