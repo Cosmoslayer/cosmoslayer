@@ -98,6 +98,10 @@ export default function Bluesky() {
               <Box
                 display='flex'
                 justifyContent='space-between'
+                alignItems={{
+                  xs: 'center',
+                  md: 'normal',
+                }}
                 marginBottom='5px'
               >
                 <Interaction

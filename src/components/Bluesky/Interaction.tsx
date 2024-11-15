@@ -17,7 +17,10 @@ export default function Interaction({
   return (
     <Box
       display='flex'
-      gap='30px'
+      gap={{
+        xs: '20px',
+        md: '40px',
+      }}
     >
       <Box
         display='flex'
