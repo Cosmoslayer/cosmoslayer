@@ -123,7 +123,7 @@ export default function Bluesky() {
                 jsx={`<Typography marginBottom='5px'>${text}</Typography>`}
               />
               <CardMedia>
-                {post.post.embed.images && post.post.embed.images.map((image: ImageInterface, index: number) => {
+                {post.post.embed?.images && post.post.embed.images.map((image: ImageInterface, index: number) => {
                   return (
                     <Image
                       key={index}

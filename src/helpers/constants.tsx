@@ -8,7 +8,7 @@ import History from '@/components/History';
 
 import moment from 'moment';
 
-export const anniversary = moment.utc('2000-11-17');
+export const anniversary = moment('2000-11-17').startOf('day');
 
 export const icons = [
   {
