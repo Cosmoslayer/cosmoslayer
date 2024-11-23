@@ -7,13 +7,16 @@ import Image from 'next/image';
 import JsxParser from 'react-jsx-parser';
 
 import {
+  Avatar,
   Box,
   Card,
   CardContent,
+  CardHeader,
   CardMedia,
   Skeleton,
   Typography
 } from '@mui/material';
+import { RestartAlt } from '@mui/icons-material';
 
 import { useGetPostsQuery } from '@/store/apiSlice';
 import { replaceHashtag } from '@/helpers/utilities';
@@ -83,6 +86,88 @@ export default function Bluesky() {
           text = replaceHashtag(facets, text);
         }
 
+        if (post.post.viewer.repost) {
+          return (
+            <Card
+              key={post.post.cid}
+              sx={{              
+                marginX: '5px',
+                padding: '5px',
+                '&:not(:last-child)' : {
+                  marginBottom: '5px',
+                }
+              }}
+            >
+              <Box
+                display='flex'
+                alignItems='center'
+                paddingLeft='16px'
+                color='gray'
+              >
+                <RestartAlt sx={{ fontSize: 20 }} /> 
+                <Typography fontWeight={700}>Reposted</Typography>
+              </Box>
+              <CardHeader
+                sx={{
+                  paddingTop: 0,
+                  paddingBottom: 0
+                }}
+                avatar={<Avatar src={post.post.author.avatar} />}
+                title={<Typography fontWeight={600}>{post.post.author.displayName}</Typography>}
+                subheader={<Typography color='gray'>@{post.post.author.handle}</Typography>}
+              />
+              <CardContent sx={{ '&:last-child': { paddingBottom: '16px' } }}>
+                <Box
+                  display='flex'
+                  justifyContent='space-between'
+                  alignItems={{
+                    xs: 'center',
+                    md: 'normal',
+                  }}
+                  marginBottom='5px'
+                >
+                  <Interaction
+                    reply={post.post.replyCount}
+                    repost={post.post.repostCount}
+                    like={post.post.likeCount}
+                  />
+                  <Typography
+                    sx={{
+                      fontSize: 12,
+                      fontWeight: 700
+                    }}
+                  >
+                    Posted {date.fromNow()}
+                  </Typography>
+                </Box>           
+                <JsxParser
+                  components={{ Box, Typography }}
+                  jsx={`<Typography marginBottom='5px'>${text}</Typography>`}
+                />
+                <CardMedia>
+                  {post.post.embed?.images && post.post.embed.images.map((image: ImageInterface, index: number) => {
+                    return (
+                      <Image
+                        key={index}
+                        src={image.fullsize}
+                        alt={image.alt}
+                        width={image?.aspectRatio?.width ?? 1000}
+                        height={image?.aspectRatio?.height ?? 1000}
+                        style={{
+                          width: '100%',
+                          height: 'auto',
+                          borderRadius: '10px',
+                        }}
+                        priority
+                      />
+                    );
+                  })}              
+                </CardMedia>
+              </CardContent>
+            </Card>
+          );
+        }
+
         return (
           <Card
             key={post.post.cid}
@@ -129,8 +214,8 @@ export default function Bluesky() {
                       key={index}
                       src={image.fullsize}
                       alt={image.alt}
-                      width={image.aspectRatio.width}
-                      height={image.aspectRatio.height}
+                      width={image?.aspectRatio?.width}
+                      height={image?.aspectRatio?.height}
                       style={{
                         width: '100%',
                         height: 'auto',

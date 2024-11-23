@@ -20,7 +20,7 @@ export interface GameInterface {
 export interface ImageInterface {
   fullsize: string,
   alt: string,
-  aspectRatio: {
+  aspectRatio?: {
     height: number,
     width: number,
   },
@@ -63,6 +63,14 @@ export interface PostInterface {
     replyCount: number,
     repostCount: number,
     likeCount: number,
+    viewer: {
+      repost: string,
+    },
+    author: {
+      avatar: string,
+      displayName: string,
+      handle: string,
+    },
   },
 };
 
