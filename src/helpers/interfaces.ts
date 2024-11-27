@@ -8,6 +8,10 @@ export interface FeatureInterface {
   features: Array<TagInterface>,
 };
 
+export interface FeedInterface {
+  post: PostInterface,
+};
+
 export interface GameInterface {
   appid: number,
   name: string,
@@ -45,32 +49,25 @@ export interface PortfolioImageInterface {
 };
 
 export interface PostInterface {
-  post: {    
-    cid: string,
-    embed?: {
-      images: Array<ImageInterface>
-    },
-    record: {
-      text: string,
-      createdAt: string,
-      embed: {
-        images: {
-          alt: string,
-        },
-      },
-      facets?: Array<FeatureInterface>,
-    },
-    replyCount: number,
-    repostCount: number,
-    likeCount: number,
-    viewer: {
-      repost: string,
-    },
-    author: {
-      avatar: string,
-      displayName: string,
-      handle: string,
-    },
+  cid?: string,
+  embed?: {
+    images: Array<ImageInterface>
+  },
+  record: {
+    text: string,
+    createdAt: string,
+    facets?: Array<FeatureInterface>,
+  },
+  replyCount: number,
+  repostCount: number,
+  likeCount: number,
+  viewer: {
+    repost?: string,
+  },
+  author: {
+    avatar: string,
+    displayName: string,
+    handle: string,
   },
 };
 

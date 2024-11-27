@@ -18,7 +18,7 @@ export default function Interaction({
     <Box
       display='flex'
       gap={{
-        xs: '20px',
+        xs: '15px',
         md: '40px',
       }}
     >
@@ -47,5 +47,5 @@ export default function Interaction({
         <Typography>{like}</Typography>
       </Box>
     </Box>
-  )
-}
+  );
+};
