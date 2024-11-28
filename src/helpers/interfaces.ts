@@ -4,10 +4,6 @@ export interface AchievementInterface {
   percentage: number,
 };
 
-export interface FeatureInterface {
-  features: Array<TagInterface>,
-};
-
 export interface FeedInterface {
   post: PostInterface,
 };
@@ -27,6 +23,13 @@ export interface ImageInterface {
   aspectRatio?: {
     height: number,
     width: number,
+  },
+};
+
+export interface IndexInterface {
+  index: {
+    byteEnd: number;
+    byteStart: number,
   },
 };
 
@@ -56,7 +59,7 @@ export interface PostInterface {
   record: {
     text: string,
     createdAt: string,
-    facets?: Array<FeatureInterface>,
+    facets?: Array<IndexInterface>,
   },
   replyCount: number,
   repostCount: number,
@@ -73,8 +76,4 @@ export interface PostInterface {
 
 export interface SkeletonInterface {
   id: number,
-};
-
-export interface TagInterface {
-  tag: string | Array<string>,
 };

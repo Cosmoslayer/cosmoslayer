@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { RestartAlt } from '@mui/icons-material';
 
-import { replaceHashtag } from '@/helpers/utilities';
+import { replaceFacets } from '@/helpers/utilities';
 import { ImageInterface, PostInterface } from '@/helpers/interfaces';
 
 import Interaction from './Interaction';
@@ -36,7 +36,7 @@ export default function Post({
   let text = record.text;
 
   if (facets) {
-    text = replaceHashtag(facets, text);
+    text = replaceFacets(facets, text);
   }
 
   return (

@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/steam/get_user"
+    "src/app/api/steam/get_user"
   ],
   "exclude": [
     "node_modules"

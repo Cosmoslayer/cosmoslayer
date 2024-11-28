@@ -1,4 +1,8 @@
-import { FeatureInterface } from "./interfaces";
+import { IndexInterface } from "./interfaces";
+
+function replaceWord(word: string, text: string) {
+  return text.replace(word, `<Box component='span' sx={{ color: 'rgb(16, 131, 254)' }}>${word}</Box>`)
+};
 
 export function getHours(minutes: number) {
   return minutes / 60;
@@ -12,14 +16,14 @@ export function pluralize(count: number, noun: string, suffix = 's') {
   return noun;
 };
 
-export function replaceHashtag(facets: Array<FeatureInterface>, text: string) {
-  const tags = facets[0].features[0].tag;
-  if (Array.isArray(tags)) {
-    for (let index = 0; index < tags.length; index++) {
-      text.replace(`#${tags[index]}`, `<Box component='span' sx={{ color: 'rgb(16, 131, 254)' }}>#${tags[index]}</Box>`);
-    }
-    return text;
+export function replaceFacets(facets: Array<IndexInterface>, text: string) {
+  let newText = text;
+  for (let index = 0; index < facets.length; index++) {
+    const startIndex = facets[index].index.byteStart;
+    const endIndex = facets[index].index.byteEnd;
+    const word = text.substring(startIndex, endIndex);
+    newText = replaceWord(word, newText);
   }
 
-  return text.replace(`#${tags}`, `<Box component='span' sx={{ color: 'rgb(16, 131, 254)' }}>#${tags}</Box>`);
+  return newText;
 };

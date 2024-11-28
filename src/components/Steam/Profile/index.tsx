@@ -2,11 +2,11 @@ import Link from 'next/link';
 
 import {
   Avatar,
-  Card,
   Box,
+  Card,
   LinearProgress,
   Skeleton,
-  Typography
+  Typography,
 } from '@mui/material';
 
 import ShowError from '@/components/ShowError';
@@ -123,9 +123,9 @@ export default function Profile() {
                       marginX: "4px"
                     }}
                   >
-                    <Skeleton variant="text" sx={{ fontSize: 20.8 }} width={70} />
-                    <Skeleton variant="text" sx={{ fontSize: 16 }} width='50%' />
-                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} width={25} />
+                    <Skeleton variant="text" sx={{ fontSize: '1rem'}} width={62} />
+                    <Skeleton variant="text" sx={{ fontSize: 16 }} width='40%' />
+                    <Skeleton variant="text" sx={{ fontSize: '1rem' }} width={46} />
                 </Box>
               </Box>
             <Box
@@ -243,8 +243,7 @@ export default function Profile() {
                 <Box
                   sx={{
                     display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
+                    justifyContent: 'center',
                     marginTop: "10px"
                   }}
                 >                  
@@ -272,7 +271,6 @@ export default function Profile() {
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-around',
-                    alignItems: 'center',
                     marginY: "2px"
                   }}
                 >
@@ -285,8 +283,8 @@ export default function Profile() {
                       marginX: "4px"
                     }}
                   >
-                    <Typography>{currentExp} / {nextLevelExp}</Typography>
-                    <Box sx={{ width: '50%'}}>
+                    <Typography variant="body2">{currentExp} / {nextLevelExp}</Typography>
+                    <Box sx={{ width: '40%'}}>
                       <LinearProgress 
                         sx={{
                           backgroundColor: 'DarkSeaGreen',
@@ -320,8 +318,7 @@ export default function Profile() {
                 <Box
                   sx={{
                     display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
+                    justifyContent: 'center',
                     marginY: "2px"
                   }}
                 >                  
