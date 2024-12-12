@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { Bluesky } from '@/helpers/credentials';
@@ -18,15 +19,29 @@ export async function GET() {
     }, {
       status: 500,
     })
-  }      
+  }
 };
 
 async function getPosts() {
-  const bearer = await getBearerToken();
+  const cookieStore = await cookies();
+
+  if (!cookieStore.has('bluesky')) {
+    const accessJwt = await getAccessJwt();
+    cookieStore.set({
+      name: 'bluesky',
+      value: accessJwt,
+      maxAge: 7200,
+      path: '/',
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+  }
+
   const res = await fetch(`https://bsky.social/xrpc/app.bsky.feed.getAuthorFeed?actor=${Bluesky.identifier}&limit=20`, {
     method: 'GET',
     headers: {
-      'Authorization': `Bearer ${bearer}`,
+      'Authorization': `Bearer ${cookieStore.get('bluesky')?.value}`,
       'Content-Type': `application/json`,
     },
   })
@@ -34,7 +49,7 @@ async function getPosts() {
   return data;
 };
 
-async function getBearerToken() {
+async function getAccessJwt() {
   const res = await fetch(`https://bsky.social/xrpc/com.atproto.server.createSession`, {
     method: 'POST',
     headers: {

@@ -10,6 +10,14 @@ import moment from 'moment';
 
 export const anniversary = moment('2000-11-17').startOf('day');
 
+export const globalQueryOptions = {
+  pollingInterval: 60 * 1000,
+  refetchOnFocus: true,
+  refetchOnMountOrArgChange: true,
+  refetchOnReconnect: true,
+  skipPollingIfUnfocused: true,
+};
+
 export const icons = [
   {
     link: {

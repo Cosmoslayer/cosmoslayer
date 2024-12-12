@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
-import CloseIcon from '@mui/icons-material/Close';
 
 import {
   Button,
@@ -11,18 +10,32 @@ import {
   Snackbar,  
   SnackbarContent
 } from '@mui/material';
+import { Close } from '@mui/icons-material';
 import Slide, { SlideProps } from '@mui/material/Slide';
 
 import { pluralize } from '@/helpers/utilities';
 import { useGetStreamQuery } from '@/store/apiSlice';
+import { globalQueryOptions } from '@/helpers/constants';
 
 import ShowError from '../ShowError';
 
 export default function Twitch() {
 
-  const { data, isSuccess, isError, error } = useGetStreamQuery<any>();
-  
   const [open, setOpen] = useState(true);
+  const [isNotified, setIsNotified] = useState(false);
+
+  const {
+    data,
+    error,
+    isError,
+    isSuccess,
+  } = useGetStreamQuery<any>(
+    undefined,
+    {
+      ...globalQueryOptions,
+      skip: isNotified,
+    }
+  );
 
   const gameName = data?.stream?.data[0]?.game_name ?? '';
   const viewerCount = data?.stream?.data[0]?.viewer_count ?? 0;
@@ -32,8 +45,15 @@ export default function Twitch() {
     if (reason === 'clickaway') {
       return;
     }
+    setIsNotified(true);
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (data?.stream.data[0]) {
+      setOpen(true);
+    }
+  }, [data])
 
   const action = (
     <>
@@ -62,10 +82,11 @@ export default function Twitch() {
           },
         }}
       >
-        <CloseIcon fontSize="small" />
+        <Close fontSize="small" />
       </IconButton>
     </>
   );
+  
   return (
     <>
       {isSuccess && data?.stream?.data[0] && (

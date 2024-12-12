@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { Twitch } from '@/helpers/credentials';
@@ -22,11 +23,25 @@ export async function GET() {
 };
 
 async function getStream() {  
-  const bearer = await getBearerToken();
+  const cookieStore = await cookies();
+
+  if (!cookieStore.has('twitch')) {
+    const accessToken = await getAccessToken();
+    cookieStore.set({
+      name: 'twitch',
+      value: accessToken.access_token,
+      maxAge: accessToken.expires_in,
+      path: '/',
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+  }
+
   const res = await fetch(`https://api.twitch.tv/helix/streams?user_id=${Twitch.user.id}`, {
     method: 'GET',
     headers: {
-      'Authorization': `Bearer ${bearer}`,
+      'Authorization': `Bearer ${cookieStore.get('twitch')?.value}`,
       'Client-Id': `${Twitch.client.id}`,
     },
   })
@@ -34,12 +49,12 @@ async function getStream() {
   return data;
 };
 
-async function getBearerToken() {
+async function getAccessToken() {
   const res = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${Twitch.client.id}&client_secret=${Twitch.client.secret}&grant_type=client_credentials`, {
     method: 'POST',
   });
   const data = await res.json();
   if (data.token_type === "bearer") {
-    return data.access_token;
+    return data;
   };
 };

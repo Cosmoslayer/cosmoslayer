@@ -10,7 +10,7 @@ import {
   Grid2 as Grid
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
 
 import { apiSlice } from '@/store/apiSlice';
 
