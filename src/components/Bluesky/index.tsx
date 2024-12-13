@@ -85,7 +85,7 @@ export default function Bluesky() {
             embed={feed.post.embed}
             record={feed.post.record}
             replyCount={feed.post.replyCount}
-            repostCount={feed.post.replyCount}
+            repostCount={feed.post.repostCount}
             likeCount={feed.post.likeCount}
             viewer={feed.post.viewer}
             author={feed.post.author}

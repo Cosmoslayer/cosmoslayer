@@ -49,7 +49,7 @@ async function getGameAchievements(appid: number) {
     method: "GET",
   });
   const gameAchievements = await res.json();
-  if (gameAchievements.playerstats.error) {
+  if (gameAchievements.playerstats.error || !gameAchievements.playerstats.achievements) {
     return undefined;
   };
   const totalAchieved = gameAchievements.playerstats.achievements.filter((game: { achieved: number }) => game.achieved === 1).length;
