@@ -1,5 +1,6 @@
 import moment from 'moment';
 import Image from 'next/image';
+import ReactPlayer from 'react-player';
 import JsxParser from 'react-jsx-parser';
 
 import {
@@ -102,6 +103,20 @@ export default function Post({
           jsx={`<Typography marginBottom='5px'>${text}</Typography>`}
         />
         <CardMedia>
+          {embed?.playlist && 
+            <Box sx={{ borderRadius: '10px', overflow: 'hidden', }}>
+              <ReactPlayer 
+                src={embed.playlist}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                }}
+                controls
+                playing
+                muted
+              />
+            </Box>
+          }              
           {embed?.images && embed.images.map((image: ImageInterface, index: number) => {
             return (
               <Image

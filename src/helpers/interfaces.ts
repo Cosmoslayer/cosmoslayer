@@ -54,6 +54,7 @@ export interface PortfolioImageInterface {
 export interface PostInterface {
   cid?: string,
   embed?: {
+    playlist: string,
     images: Array<ImageInterface>
   },
   record: {

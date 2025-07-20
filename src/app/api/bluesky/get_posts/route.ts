@@ -38,7 +38,7 @@ async function getPosts() {
     });
   }
 
-  const res = await fetch(`https://bsky.social/xrpc/app.bsky.feed.getAuthorFeed?actor=${Bluesky.identifier}&limit=20`, {
+  const res = await fetch(`https://bsky.social/xrpc/app.bsky.feed.getAuthorFeed?actor=${Bluesky.identifier}&filter=posts_no_replies&limit=20`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${cookieStore.get('bluesky')?.value}`,
