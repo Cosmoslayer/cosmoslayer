@@ -14,7 +14,7 @@ export async function GET() {
         name: games.name,
         playtime_2weeks: +getHours(games.playtime_2weeks).toFixed(1),
         playtime_forever: +getHours(games.playtime_forever).toFixed(1),
-        img_icon_url: games.img_icon_url,
+        img_icon_url: await getImageIcon(games.appid),
         achievements: await getGameAchievements(games.appid),
       }
       last_games_played.push(game);
@@ -60,4 +60,12 @@ async function getGameAchievements(appid: number) {
     totalAchievements,
     percentage
   };
+};
+
+async function getImageIcon(appid: number) {
+  const res = await fetch(`https://store.steampowered.com/api/appdetails?appids=${appid}`, {
+    method: "GET",
+  });
+  const data = await res.json();
+  return data[appid].data.header_image;
 };

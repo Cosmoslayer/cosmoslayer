@@ -107,12 +107,12 @@ export default function Post({
             <Box sx={{ borderRadius: '10px', overflow: 'hidden', }}>
               <ReactPlayer 
                 src={embed.playlist}
+                playing={false}
                 style={{
                   width: '100%',
                   height: 'auto',
                 }}
                 controls
-                playing
                 muted
               />
             </Box>

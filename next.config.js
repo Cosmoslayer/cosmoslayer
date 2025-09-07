@@ -5,9 +5,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'steamcdn-a.akamaihd.net',
+        hostname: 'shared.akamai.steamstatic.com',
         port: '',
-        pathname: '/steam/apps/**',
+        pathname: '/store_item_assets/steam/apps/**',
       },
       {
         protocol: 'https',

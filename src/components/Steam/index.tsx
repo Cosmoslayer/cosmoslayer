@@ -164,7 +164,7 @@ export default function Steam() {
             }}
           >
             <Typography sx={{ background: 'linear-gradient(to right, #E6F2FF, #B9DCFF, #8DC5FE, #60AFFE)', fontWeight: 700, mb: "5px" }} variant='h6'>{game.name}</Typography>
-            <Image src={`https://steamcdn-a.akamaihd.net/steam/apps/${game.appid}/header.jpg`} alt={game.name} height={69} width={184} priority />
+            <Image src={game.img_icon_url} alt={game.name} height={69} width={184} priority />
             <Typography sx={{ background: 'linear-gradient(to right, #E6F2FF, #B9DCFF, #8DC5FE, #60AFFE)', fontWeight: 700, mb: "5px" }} variant='body1'>Playtime</Typography>
           </Box>
             <Box

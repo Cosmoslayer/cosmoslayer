@@ -26,16 +26,14 @@ async function getStream() {
   const cookieStore = await cookies();
 
   if (!cookieStore.has('twitch')) {
-    const accessToken = await getAccessToken();
-    cookieStore.set({
-      name: 'twitch',
-      value: accessToken.access_token,
-      maxAge: accessToken.expires_in,
-      path: '/',
-      secure: true,
-      httpOnly: true,
-      sameSite: 'strict',
-    });
+    await createCookie();
+  }
+
+  const validatedToken = await validateToken();
+  
+  if (validatedToken.status === 401) {
+    cookieStore.delete('twitch');
+    await createCookie();
   }
 
   const res = await fetch(`https://api.twitch.tv/helix/streams?user_id=${Twitch.user.id}`, {
@@ -58,3 +56,31 @@ async function getAccessToken() {
     return data;
   };
 };
+
+async function createCookie() {
+  const cookieStore = await cookies();
+  const accessToken = await getAccessToken();
+  
+  cookieStore.set({
+    name: 'twitch',
+    value: accessToken.access_token,
+    maxAge: accessToken.expires_in,
+    path: '/',
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+async function validateToken() {
+  const cookieStore = await cookies();
+ 
+  const res = await fetch(`https://id.twitch.tv/oauth2/validate`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${cookieStore.get('twitch')?.value}`,
+    },
+  })
+  const data = await res.json();
+  return data;
+}
